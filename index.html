@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>click demo</title>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  
+ 
+
+</head>
+<body>
+ 
+<button id="btn" type="button">Click Me!</button>
+
+ 
+<script>
+
+  function PrintAll() {
+    var pages = ["sample/Desert.jpg", "sample/Koala.jpg"];
+    for (var i = 0; i < pages.length; i++) {
+        var oWindow = window.open(pages[i]);
+        oWindow.print();
+        oWindow.close();
+    }
+	}
+	
+	function ImagestoPrint(files) {
+    var result= "<html>"+
+				"<head>"+
+					"<script>"+
+						"function step1(){\n" +
+							"setTimeout('step2()', 10);"+
+						"}" +
+						"function step2(){"+
+							"window.print();"+
+							"window.close()"+
+						"}" +
+					"</scri" + "pt>"+
+				"</head>"+
+				"<body onload='step1()'>";
+				
+				for(var i = 0 ; i<files.length; i++){
+					result += "<img src='" + files[i] + "' />";
+				}
+				
+				result += "</body>"+
+			"</html>";
+			
+		return result;
+}
+function PrintImages(files) {
+    Pagelink = "about:blank";
+    var pwa = window.open(Pagelink, "_new");
+    pwa.document.open();
+    pwa.document.write(ImagestoPrint(files));
+    pwa.document.close();
+}
+  
+$( "#btn" ).click(function() {
+    var list = ["sample/Desert.jpg", "sample/Koala.jpg", "sample/Koala.jpg", "sample/Koala.jpg", "sample/Koala.jpg", "sample/Koala.jpg", "sample/Koala.jpg"];
+
+	PrintImages(list)
+});
+</script>
+ 
+</body>
+</html>
